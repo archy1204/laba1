@@ -1,5 +1,3 @@
-
-
 #include <list>
 #include <iostream>
 #define cles 1
@@ -167,7 +165,7 @@ void menu()
 
 void men()
 {
-	cout << "Menu:\n(1)List\n(2)Deck\n(3)Stack\n(4)Import file\n(5)Export file\n(6)Exit" << endl << endl;
+	
 }
 
 void disp()

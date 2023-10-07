@@ -1,4 +1,4 @@
-#include "List.h"
+/*#include "List.h"
 #include<iostream>
 
 List::List()
@@ -17,7 +17,7 @@ List::List(int siz)
 List::~List()
 {
 	clear();
-	/*cout << "111" << endl;*/
+	/*cout << "111" << endl;*/ /*
 }
 
 List::List(const List& other)
@@ -297,7 +297,7 @@ void List::Show()
 		cout << "The list is empty!!!" << endl;
 }
 
-Node::Node(int data, Node* pNext, Node* pPrev)
+Node::Node(int data, Node<T>* pNext, Node<T>* pPrev)
 {
 	this->data = data;
 	this->pNext = pNext;
@@ -368,4 +368,4 @@ void operator==(const List& lis, int val)
 		}
 	}
 	cout << endl;
-}
+} */

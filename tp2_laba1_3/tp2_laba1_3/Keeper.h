@@ -3,20 +3,30 @@
 
 using namespace std;
 
-template <typename T>
 class Keeper {
 private:
-	List<T>* list = nullptr;
+	List* list = nullptr;
 	
 public:
 	Keeper();
-	Keeper(List<T>* list);
+	Keeper(List* list);
 	~Keeper();
 
-	List<T>* getList();
-	void addObject(T& data);
-	void addObject(T& data, int i);
-	T getObject(int i);
+	List* getList();
+
+	void addFish(Fish& data);
+	void addFish(Fish& data, int i);
+
+	void addBird(Bird& data);
+	void addBird(Bird& data, int i);
+
+	void addCat(Cat& data);
+	void addCat(Cat& data, int i);
+
+	Fish getFish(int i);
+	Bird getBird(int i);
+	Cat getCat(int i);
+
 	void remove(int i);
 	int size();
 	void clear();
@@ -24,65 +34,86 @@ public:
 	void exportList();
 };
 
-template <typename T>
-Keeper<T>::Keeper() {
-	list = new List<T>();
+Keeper::Keeper() {
+	list = new List();
 	cout << "Был вызван конструктор объекта класса Keeper." << endl;
 }
 
-template <typename T>
-Keeper<T>::Keeper(List<T>* list) {
+Keeper::Keeper(List* list) {
 	this->list = list;
 	cout << "Был вызван конструктор копирования объекта класса Keeper." << endl;
 }
 
-template <typename T>
-Keeper<T>::~Keeper() {
+Keeper::~Keeper() {
 	clear();
 	cout << "Был вызван деструктор объекта класса Keeper." << endl;
 }
 
-template <typename T>
-List<T>* Keeper<T>::getList() {
+List* Keeper::getList() {
 	return list;
 }
 
-template <typename T>
-void Keeper<T>::addObject(T& data) {
+
+//    add 1
+void Keeper::addFish(Fish& data) {
 	list->add(data);
 }
 
-template <typename T>
-void Keeper<T>::addObject(T& data, int i) {
+void Keeper::addFish(Fish& data, int i) {
 	list->insert(data, i);
 }
-
-template <typename T>
-T Keeper<T>::getObject(int i) {
-	return list->get(i);
+//        2
+void Keeper::addBird(Bird& data) {
+	list->add(data);
 }
 
-template <typename T>
-void Keeper<T>::remove(int i) {
+void Keeper::addBird(Bird& data, int i) {
+	list->insert(data, i);
+}
+//        3
+void Keeper::addCat(Cat& data) {
+	list->add(data);
+}
+
+void Keeper::addCat(Cat& data, int i) {
+	list->insert(data, i);
+}
+//
+
+
+
+//       get 1
+Fish Keeper::getFish(int i) {
+	return list->get(i);
+}
+//			 2
+Bird Keeper::getBird(int i) {
+	return list->get(i);
+}
+//			 3
+Cat Keeper::getCat(int i) {
+	return list->get(i);
+}
+//
+
+
+
+void Keeper::remove(int i) {
 	list->remove(i);
 }
 
-template <typename T>
-int Keeper<T>::size() {
+int Keeper::size() {
 	list->getSize();
 }
 
-template <typename T>
-void Keeper<T>::clear() {
+void Keeper::clear() {
 	list->clear();
 }
 
-template <typename T>
-void Keeper<T>::importList() {
+void Keeper::importList() {
 
 }
 
-template <typename T>
-void Keeper<T>::exportList() {
+void Keeper::exportList() {
 
 }

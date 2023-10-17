@@ -17,7 +17,7 @@ public:
 	Node(T data, Node<T>* pNext = nullptr, Node<T>* pPrev = nullptr);
 
 };
-template <typename T>
+
 class List
 {
 	template <typename T>
@@ -28,10 +28,22 @@ public:
 	~List();
 	List(const List& other);
 	
-	void add(T data);
-	void insert(T data, int i);
-	T remove(int index);
-	T get(int i);
+	void addFish(Fish data);
+	void addBird(Bird data);
+	void addCat(Cat data);
+
+	void insertFish(Fish data, int i);
+	void insertBird(Bird data, int i);
+	void insertCat(Cat data, int i);
+
+	Fish removeFish(int index);
+	Bird removeBird(int index);
+	Cat removeCat(int index);
+
+	Fish getFish(int i);
+	Bird getBird(int i);
+	Cat getCat(int i);
+
 	void clear();
 	
 	void operator = (const List& other);
@@ -47,33 +59,29 @@ private:
 	Node<T>* tail;
 };
 template <typename T>
-void operator != (const List<T>& lis, int val);
+void operator != (const List& lis, int val);
 template <typename T>
-void operator == (const List<T>& lis, int val);
+void operator == (const List& lis, int val);
 
-template <typename T>
-List<T>::List()
+List::List()
 {
 	size = 0;
 	head = nullptr;
 }
 
-template <typename T>
-List<T>::List(int siz)
+List::List(int siz)
 {
 	size = 0;
 	head = nullptr;
 }
 
-template <typename T>
-List<T>::~List()
+List::~List()
 {
 	clear();
 	/*cout << "111" << endl;*/
 }
 
-template <typename T>
-List<T>::List(const List<T>& other)
+List::List(const List& other)
 {
 	int cnt = 0;
 	this->size = other.size;
@@ -109,8 +117,7 @@ List<T>::List(const List<T>& other)
 
 
 
-template <typename T>
-void List<T>::add(T data)
+void List::add(T data)
 {
 	if (head == nullptr)
 	{
@@ -131,8 +138,7 @@ void List<T>::add(T data)
 	size++;
 }
 
-template <typename T>
-void List<T>::insert(T data, int index) {
+void List::insert(T data, int index) {
 	int counter = 0;
 	Node<T>* current = this->head;
 	while (current != nullptr)
@@ -153,8 +159,7 @@ void List<T>::insert(T data, int index) {
 
 }
 
-template <typename T>
-T List<T>::get(int index) {
+T List::get(int index) {
 	int counter = 0;
 	Node<T>* current = this->head;
 	while (current != nullptr)
@@ -168,8 +173,7 @@ T List<T>::get(int index) {
 	}
 }
 
-template <typename T>
-T List<T>::remove(int index) {
+T List::remove(int index) {
 	int counter = 0;
 	Node<T>* current = this->head;
 	while (current != nullptr)
@@ -188,8 +192,7 @@ T List<T>::remove(int index) {
 	size--;
 }
 
-template <typename T>
-void List<T>::clear()
+void List::clear()
 {
 	Node<T>* temp = head;
 	while (size)
@@ -204,8 +207,7 @@ void List<T>::clear()
 
 
 
-template <typename T>
-void List<T>::operator=(const List<T>& other)
+void List::operator=(const List& other)
 {
 	int cnt = 0;
 	this->size = other.size;
@@ -241,14 +243,12 @@ void List<T>::operator=(const List<T>& other)
 
 
 
-template <typename T>
-int List<T>::getSize()
+int List::getSize()
 {
 	return size;
 }
 
-template <typename T>
-int List<T>::request_strt()
+int List::request_strt()
 {
 	int strt;
 	cout << "Input the list length: ";
@@ -256,8 +256,7 @@ int List<T>::request_strt()
 	return strt;
 }
 
-template <typename T>
-void List<T>::Show()
+void List::Show()
 {
 	Node<T>* current = this->head;
 	if (current != nullptr)
@@ -281,8 +280,7 @@ Node<T>::Node(T data, Node<T>* pNext, Node<T>* pPrev)
 	this->pPrev = pPrev;
 }
 
-template <typename T>
-void operator==(const List<T>& list, T val)
+void operator==(const List& list, T val)
 {
 	bool comp2 = false;
 

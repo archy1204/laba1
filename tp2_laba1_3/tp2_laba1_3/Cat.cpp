@@ -30,3 +30,36 @@ void Cat::setNickname(string nickname) {
 string Cat::getNickname() {
 	return nickname;
 }
+
+ostream& operator << (std::ostream& stream, Cat& obj) {
+	stream << "Breed is " << obj.breed << endl;
+	stream << "Color is " << obj.color << endl;
+	stream << "FeedType is " << obj.ownerName << endl;
+	stream << "FeedType is " << obj.nickname << endl;
+	stream << endl;
+	return stream;
+}
+
+istream& operator >> (std::istream& stream, Cat& obj) {
+	stream >> obj.breed;
+	stream >> obj.color;
+	stream >> obj.ownerName;
+	stream >> obj.nickname;
+	return stream;
+}
+
+bool Cat::operator == (const Cat& obj) {
+	if (obj.breed != this->breed)
+		return false;
+	if (obj.color != this->color)
+		return false;
+	if (obj.nickname != this->nickname)
+		return false;
+	if (obj.ownerName != this->ownerName)
+		return false;
+	return true;
+}
+
+string Cat::showType() {
+	return "Cat";
+}

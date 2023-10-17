@@ -1,172 +1,66 @@
-#include <list>
+#pragma once
+#include "Keeper.h"
 #include <iostream>
 #define cles 1
+
 using namespace std;
 
+void options();
 void menu();
-void men();
 void disp();
 void cls();
-void elad();
-void elre();
-void inc();
-void imp();
-void exp();
 
+Keeper<Animal>* keeper = new Keeper<Animal>();
 
-int main(void)                         //   1. Реализовать меню						2. Узнать про работу с файлами и реализовать
-{									   //   3. Узнать про абстрактность класса		4. Узнать про динамическое выделение памяти
-	menu();
+int main(void) {                       //   1. Реализовать меню						2. Узнать про работу с файлами и реализовать
+	menu();								//   3. Узнать про абстрактность класса			4. Узнать про динамическое выделение памяти
 	return 0;
 }
 
-void menu()
-{
+void menu() {
 	int choice = 0;
 	int k = 0;
-
-	men();
-	while (choice != 6)
-	{
+	options();
+	cin >> choice;
+	switch (choice) {
+	case 1: {
+		cout << "What object do you want to create?\n";
+		cout << "Fish.\n";
+		cout << "Bird.\n";
+		cout << "Cat.\n";
 		cin >> choice;
-		cls();
-		switch (choice)
-		{
-		case 1: //////////////////////////////Open list menu
-		{
-			k = 0;
-			disp();
-			cout << "List\n";
-			while (k != 3)
-			{
-				cin >> k;
-				switch (k)
-				{
-				case 1:////Add element
-					cls();
-					disp();
-					cout << "List\n";
-					elad();
-					break;
-				case 2://///Remove element
-					cls();
-					disp();
-					cout << "List\n";
-					elre();
-					break;
-				case 3:///To main menu
-					cls();
-					men();
-					break;
-				default:
-					cls();
-					disp();
-					cout << "List\n";
-					inc();
-					break;
-				}
-			}
-			break;
+		switch (choice) {
+		case 1: {
+			string bread, color, feedType;
+			cout << "Enter the breed, the color and the type of feed.";
+			cin >> bread >> color >> feedType;
+			Fish fish{ bread, color, feedType };
+			keeper->addObject(fish);
 		}
-		case 2: //////////////////////////////Open deck menu
-		{
-			k = 0;
-			disp();
-			cout << "Deck\n";
-			while (k != 3)
-			{
-				cin >> k;
-				switch (k)
-				{
-				case 1:////Add element
-					cls();
-					disp();
-					cout << "Deck\n";
-					elad();
-					break;
-				case 2://///Remove element
-					cls();
-					disp();
-					cout << "Deck\n";
-					elre();
-					break;
-				case 3:///To main menu
-					cls();
-					men();
-					break;
-				default:
-					cls();
-					disp();
-					cout << "Deck\n";
-					inc();
-					break;
-				}
-			}
-			break;
-		}
-		case 3:
-		{
-			k = 0;
-			disp();
-			cout << "Stack\n";
-			while (k != 3)
-			{
-				cin >> k;
-				switch (k)
-				{
-				case 1:////Add element
-					cls();
-					disp();
-					cout << "Stack\n";
-					elad();
-					break;
-				case 2://///Remove element
-					cls();
-					disp();
-					cout << "Stack\n";
-					elre();
-					break;
-				case 3:///To main menu
-					cls();
-					men();
-					break;
-				default:
-					cls();
-					disp();
-					cout << "Stack\n";
-					inc();
-					break;
-				}
-			}
-			break;
-		}
-		case 4:
-			cls();
-			men();
-			imp();
-			break;
-		case 5:
-			cls();
-			men();
-			exp();
-			break;
-		case 6:
-			cls();
-			men();
-			break;
-		default:
-			cls();
-			men();
-			inc();
-			break;
+			  break;
 		}
 	}
+	case 2:
+		break;
+	case 3:
+		break;
+	case 4:
+		break;
+	case 5:
+		break;
+	case 6:
+		break;
+	default:
+		cout << "";
+
+	}
+	Animal animal = keeper->getObject(0);
+	//cout << animal.getBreed();
+	cout<< animal.showType();
+	Animal* an{ &animal };
+	//Fish fis = static_cast<Fish>(an);
 }
 
-void men()
-{
-	
-}
 
 void disp()
 {
@@ -179,27 +73,13 @@ void cls()
 		system("cls");
 }
 
-void elad()
-{
-	cout << "Element added!\n";
-}
-
-void elre()
-{
-	cout << "Element removed!\n";
-}
-
-void inc()
-{
-	cout << "Incorrect input!\n" << endl;
-}
-
-void imp()
-{
-	cout << "File imported!\n" << endl;
-}
-
-void exp()
-{
-	cout << "File exported!\n" << endl;
+void options() {
+	cout << "Menu\n";
+	cout << "1) Add new object.\n";
+	cout << "2) Get object.\n";
+	cout << "3) Remove object fron list.\n";
+	cout << "4) Size of the list.\n";
+	cout << "5) Clear the list.\n";
+	cout << "6) Import list from file.\n";
+	cout << "7) Export list to file.\n";
 }

@@ -28,3 +28,7 @@ void Animal::setColor(string color) {
 string Animal::getColor() {
 	return color;
 }
+
+string Animal::showType() {
+	return "null;";
+}

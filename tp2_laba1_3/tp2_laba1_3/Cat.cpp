@@ -1,7 +1,7 @@
 #include "Cat.h"
 
 Cat::Cat() {
-	cout << "Был вызван конструктор без параметров объекта класса Cat." << endl;
+	cout << "Cat null constructor." << endl;
 }
 
 Cat::Cat(string breed, string color, string ownerName, string nickname) {
@@ -9,11 +9,11 @@ Cat::Cat(string breed, string color, string ownerName, string nickname) {
 	this->color = color;
 	this->ownerName = ownerName;
 	this->nickname = nickname;
-	cout << "Был вызван конструктор с параметрами объекта класса Cat." << endl;
+	cout << "Cat constructor with parametrs." << endl;
 }
 
 Cat::~Cat() {
-	cout << "Был вызван деструктор объекта класса Cat." << endl;
+	cout << "Cat destructor." << endl;
 }
 
 void Cat::setOwnerName(string ownerName) {

@@ -1,18 +1,18 @@
 #include "Fish.h"
 
 Fish::Fish() {
-	cout << "Был вызван конструктор без параметров объекта класса Fish." << endl;
+	cout << "Fish null constructor." << endl;
 }
 
 Fish::Fish(string breed, string color, string feedType) {
 	this->breed = breed;
 	this->color = color;
 	this->feedType = feedType;
-	cout << "Был вызван конструктор с параметрами объекта класса constr Fish." << endl;
+	cout << "Fish constructor with parametrs." << endl;
 }
 
 Fish::~Fish() {
-	cout << "Был вызван деструктор объекта класса des Fish." << endl;
+	cout << "Fish destructor." << endl;
 }
 
 void Fish::setFeedType(string feedType) {

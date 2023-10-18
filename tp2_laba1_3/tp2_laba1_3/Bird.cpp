@@ -1,7 +1,7 @@
 #include "Bird.h"
 
 Bird::Bird() {
-	cout << "Был вызван конструктор без параметров объекта класса Bird." << endl;
+	cout << "Bird null constructor." << endl;
 }
 
 Bird::Bird(string breed, string color, string feed, string habitat) {
@@ -9,11 +9,11 @@ Bird::Bird(string breed, string color, string feed, string habitat) {
 	this->color = color;
 	this->feed = feed;
 	this->habitat = habitat;
-	cout << "Был вызван конструктор с параметрами объекта класса Bird." << endl;
+	cout << "Bird constructor with parametrs." << endl;
 }
 
 Bird::~Bird() {
-	cout << "Был вызван деструктор объекта класса Bird." << endl;
+	cout << "Bird destructor." << endl;
 }
 
 void Bird::setFeed(string feed) {

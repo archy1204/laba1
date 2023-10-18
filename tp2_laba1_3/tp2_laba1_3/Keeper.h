@@ -1,18 +1,24 @@
 #pragma once
 #include "List.h"
+#include <fstream>
+#include<string>
 
 using namespace std;
 
 class Keeper {
 private:
-	List* list = nullptr;
+	List<Fish>* list1 = nullptr;
+	List<Bird>* list2 = nullptr;
+	List<Cat>* list3 = nullptr;
 	
 public:
 	Keeper();
-	Keeper(List* list);
+	Keeper(List<Fish>* list1, List<Bird>* list2, List<Cat>* list3);
 	~Keeper();
 
-	List* getList();
+	List<Fish>* getFishList();
+	List<Bird>* getBirdList();
+	List<Cat>* getCatList();
 
 	void addFish(Fish& data);
 	void addFish(Fish& data, int i);
@@ -27,93 +33,22 @@ public:
 	Bird getBird(int i);
 	Cat getCat(int i);
 
-	void remove(int i);
-	int size();
-	void clear();
-	void importList();
-	void exportList();
+	Fish removeFish(int i);
+	Bird removeBird(int i);
+	Cat removeCat(int i);
+
+	void showFish();
+	void showBird();
+	void showCat();
+
+	int sizeFish();
+	int sizeBird();
+	int sizeCat();
+
+	void clearFish();
+	void clearBird();
+	void clearCat();
+
+	void importLists();
+	void exportLists();
 };
-
-Keeper::Keeper() {
-	list = new List();
-	cout << "Был вызван конструктор объекта класса Keeper." << endl;
-}
-
-Keeper::Keeper(List* list) {
-	this->list = list;
-	cout << "Был вызван конструктор копирования объекта класса Keeper." << endl;
-}
-
-Keeper::~Keeper() {
-	clear();
-	cout << "Был вызван деструктор объекта класса Keeper." << endl;
-}
-
-List* Keeper::getList() {
-	return list;
-}
-
-
-//    add 1
-void Keeper::addFish(Fish& data) {
-	list->add(data);
-}
-
-void Keeper::addFish(Fish& data, int i) {
-	list->insert(data, i);
-}
-//        2
-void Keeper::addBird(Bird& data) {
-	list->add(data);
-}
-
-void Keeper::addBird(Bird& data, int i) {
-	list->insert(data, i);
-}
-//        3
-void Keeper::addCat(Cat& data) {
-	list->add(data);
-}
-
-void Keeper::addCat(Cat& data, int i) {
-	list->insert(data, i);
-}
-//
-
-
-
-//       get 1
-Fish Keeper::getFish(int i) {
-	return list->get(i);
-}
-//			 2
-Bird Keeper::getBird(int i) {
-	return list->get(i);
-}
-//			 3
-Cat Keeper::getCat(int i) {
-	return list->get(i);
-}
-//
-
-
-
-void Keeper::remove(int i) {
-	list->remove(i);
-}
-
-int Keeper::size() {
-	list->getSize();
-}
-
-void Keeper::clear() {
-	list->clear();
-}
-
-void Keeper::importList() {
-
-}
-
-void Keeper::exportList() {
-
-}

@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <fstream>
 #include <string>
 using namespace std;
 
@@ -8,17 +9,16 @@ protected:
 	string breed;
 	string color;
 public:
-	/* Animal();
+	Animal();
 	Animal(string breed, string color);
-	~Animal(); */
+	~Animal(); 
 
-	friend ostream& operator << (ostream& stream, Animal& obj);
-	friend istream& operator >> (istream& stream, Animal& obj);
-	//friend virtual ostream& operator << (ostream& stream, Fish& obj);
-	//friend virtual istream& operator >> (istream& stream, Fish& obj);
 	bool operator == (const Animal& obj);
 
-	virtual string showType();
+	virtual void save(string fileName) = 0;
+	virtual void change() = 0;
+	virtual void show() = 0;
+	virtual string showType() = 0;
 	void setBreed(string breed);
 	string getBreed();
 	void setColor(string color);

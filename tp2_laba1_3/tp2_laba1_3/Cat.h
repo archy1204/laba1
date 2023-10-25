@@ -14,11 +14,12 @@ public:
 	Cat(string breed, string color, string ownerName, string nickname);
 	~Cat();
 
-	friend ostream& operator << (ostream& stream, Cat& obj);
-	friend istream& operator >> (istream& stream, Cat& obj);
 	bool operator == (const Cat& obj);
 
-	string showType();
+	virtual void save(string fileName);
+	virtual void change();
+	virtual void show();
+	virtual string showType();
 	void setOwnerName(string ownerName);
 	string getOwnerName();
 	void setNickname(string nickname);

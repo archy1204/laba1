@@ -31,23 +31,6 @@ string Bird::getHabitat() {
 	return habitat;
 }
 
-ostream& operator << (std::ostream& stream, Bird& obj) {
-	stream << "Breed is " << obj.breed << endl;
-	stream << "Color is " << obj.color << endl;
-	stream << "FeedType is " << obj.feed << endl;
-	stream << "FeedType is " << obj.habitat << endl;
-	stream << endl;
-	return stream;
-}
-
-istream& operator >> (std::istream& stream, Bird& obj) {
-	stream >> obj.breed;
-	stream >> obj.color;
-	stream >> obj.feed;
-	stream >> obj.habitat;
-	return stream;
-}
-
 bool Bird::operator == (const Bird& obj) {
 	if (obj.breed != this->breed)
 		return false;
@@ -62,4 +45,60 @@ bool Bird::operator == (const Bird& obj) {
 
 string Bird::showType() {
 	return "Bird";
+}
+
+void Bird::save(string fileName) {
+	ofstream fout(fileName, ios_base::app);
+	fout << breed << "\n";
+	fout << color << "\n";
+	fout << feed << "\n";
+	fout << habitat << "\n";
+	fout.close();
+}
+
+void Bird::change() {
+	int param;
+	string value;
+	while (true) {
+		cout << "What do you want to change?\n1)Breed\n2)Color\n3)Feed\n4)Habitat\n5)Exit\n";
+		cin >> param;
+		switch (param) {
+		case 1:
+			cout << "value is - ";
+			cin >> value;
+			cout << endl;
+			this->breed = value;
+			break;
+		case 2:
+			cout << "value is - ";
+			cin >> value;
+			cout << endl;
+			this->color = value;
+			break;
+		case 3:
+			cout << "value is - ";
+			cin >> value;
+			cout << endl;
+			this->feed = value;
+			break;
+		case 4:
+			cout << "value is - ";
+			cin >> value;
+			cout << endl;
+			this->habitat = value;
+			break;
+		case 5:
+			return;
+		default:
+			cout << "Incorrect input\n";
+		}
+	}
+}
+
+void Bird::show() {
+	cout << "Breed is " << breed << endl;
+	cout << "Color is " << color << endl;
+	cout << "FeedType is " << feed << endl;
+	cout << "FeedType is " << habitat << endl;
+	cout << endl;
 }

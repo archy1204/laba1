@@ -22,21 +22,6 @@ string Fish::getFeedType() {
 	return feedType;
 }
 
-ostream& operator << (std::ostream& stream, Fish& obj) {
-	stream << "Breed is "<< obj.breed<<endl;
-	stream << "Color is " << obj.color << endl;
-	stream << "FeedType is " << obj.feedType << endl;
-	stream << endl;
-	return stream;
-}
-
-istream& operator >> (std::istream& stream, Fish& obj) {
-	stream >> obj.breed;
-	stream >> obj.color;
-	stream >> obj.feedType;
-	return stream;
-}
-
 bool Fish::operator == (const Fish& obj) {
 	if (obj.breed != this->breed)
 		return false;
@@ -50,3 +35,52 @@ bool Fish::operator == (const Fish& obj) {
 string Fish::showType() {
 	return "Fish";
  }
+
+void Fish::save(string fileName) {
+	ofstream fout(fileName, ios_base::app);
+	fout << "fish!" << "\n";
+	fout << breed << "\n";
+	fout << color << "\n";
+	fout << feedType << "\n";
+	fout.close();
+}
+
+void Fish::change() {
+	int param;
+	string value;
+	while (true) {
+		cout << "What do you want to change?\n1)Breed\n2)Color\n3)FeedType\n4)Exit\n";
+		cin >> param;
+		switch (param) {
+		case 1:
+			cout << "value is - ";
+			cin >> value;
+			cout << endl;
+			this->breed = value;
+			break;
+		case 2:
+			cout << "value is - ";
+			cin >> value;
+			cout << endl;
+			this->color = value;
+			break;
+		case 3:
+			cout << "value is - ";
+			cin >> value;
+			cout << endl;
+			this->feedType = value;
+			break;
+		case 4:
+			return;
+		default:
+			cout << "Incorrect input\n";
+		}
+	}
+}
+
+void Fish::show() {
+	cout << "Breed is " << breed << endl;
+	cout << "Color is " << color << endl;
+	cout << "FeedType is " << feedType << endl;
+	cout << endl;
+}

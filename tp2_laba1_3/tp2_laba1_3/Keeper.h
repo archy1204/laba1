@@ -1,54 +1,47 @@
 #pragma once
-#include "List.h"
-#include <fstream>
-#include<string>
+#include <string>
+#include "Animal.h"
+#include "Fish.h"
+#include "Bird.h"
+#include "Cat.h"
 
 using namespace std;
 
-class Keeper {
-private:
-	List<Fish>* list1 = nullptr;
-	List<Bird>* list2 = nullptr;
-	List<Cat>* list3 = nullptr;
-	
+class Node
+{
+public:
+	Node*pNext;
+	Node* pPrev;
+	Animal* data;
+	Node(Animal* data, Node* pNext = nullptr, Node* pPrev = nullptr);
+
+};
+class Keeper
+{
+	friend void operator == (const Keeper& lis, Animal* val);
 public:
 	Keeper();
-	Keeper(List<Fish>* list1, List<Bird>* list2, List<Cat>* list3);
+	explicit Keeper(int siz);
 	~Keeper();
+	Keeper(const Keeper& other);
 
-	List<Fish>* getFishList();
-	List<Bird>* getBirdList();
-	List<Cat>* getCatList();
+	void add(Animal* data);
+	void insert(Animal* data, int i);
+	Animal* remove(int index);
+	Animal* get(int i);
+	void clear();
+	void importList();
+	void exportList();
 
-	void addFish(Fish& data);
-	void addFish(Fish& data, int i);
+	void operator = (const Keeper& other);
 
-	void addBird(Bird& data);
-	void addBird(Bird& data, int i);
 
-	void addCat(Cat& data);
-	void addCat(Cat& data, int i);
-
-	Fish getFish(int i);
-	Bird getBird(int i);
-	Cat getCat(int i);
-
-	Fish removeFish(int i);
-	Bird removeBird(int i);
-	Cat removeCat(int i);
-
-	void showFish();
-	void showBird();
-	void showCat();
-
-	int sizeFish();
-	int sizeBird();
-	int sizeCat();
-
-	void clearFish();
-	void clearBird();
-	void clearCat();
-
-	void importLists();
-	void exportLists();
+	int getSize();
+	void show();
+private:
+	int size;
+	Node* head;
+	Node* tail;
 };
+
+void operator == (const Keeper& lis, int val);

@@ -31,23 +31,6 @@ string Cat::getNickname() {
 	return nickname;
 }
 
-ostream& operator << (std::ostream& stream, Cat& obj) {
-	stream << "Breed is " << obj.breed << endl;
-	stream << "Color is " << obj.color << endl;
-	stream << "FeedType is " << obj.ownerName << endl;
-	stream << "FeedType is " << obj.nickname << endl;
-	stream << endl;
-	return stream;
-}
-
-istream& operator >> (std::istream& stream, Cat& obj) {
-	stream >> obj.breed;
-	stream >> obj.color;
-	stream >> obj.ownerName;
-	stream >> obj.nickname;
-	return stream;
-}
-
 bool Cat::operator == (const Cat& obj) {
 	if (obj.breed != this->breed)
 		return false;
@@ -62,4 +45,60 @@ bool Cat::operator == (const Cat& obj) {
 
 string Cat::showType() {
 	return "Cat";
+}
+
+void Cat::save(string fileName) {
+	ofstream fout(fileName, ios_base::app);
+	fout << breed << "\n";
+	fout << color << "\n";
+	fout << ownerName << "\n";
+	fout << nickname << "\n";
+	fout.close();
+}
+
+void Cat::change() {
+	int param;
+	string value;
+	while (true) {
+		cout << "What do you want to change?\n1)Breed\n2)Color\n3)OwnerName\n4)Nickname\n5)Exit\n";
+		cin >> param;
+		switch (param) {
+		case 1:
+			cout << "value is - ";
+			cin >> value;
+			cout << endl;
+			this->breed = value;
+			break;
+		case 2:
+			cout << "value is - ";
+			cin >> value;
+			cout << endl;
+			this->color = value;
+			break;
+		case 3:
+			cout << "value is - ";
+			cin >> value;
+			cout << endl;
+			this->ownerName = value;
+			break;
+		case 4:
+			cout << "value is - ";
+			cin >> value;
+			cout << endl;
+			this->nickname = value;
+			break;
+		case 5:
+			return;
+		default:
+			cout << "Incorrect input\n";
+		}
+	}
+}
+
+void Cat::show() {
+	cout << "Breed is " << breed << endl;
+	cout << "Color is " << color << endl;
+	cout << "FeedType is " << ownerName << endl;
+	cout << "FeedType is " << nickname << endl;
+	cout << endl;
 }

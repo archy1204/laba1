@@ -27,9 +27,6 @@
     <ClCompile Include="Cat.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="List.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Keeper.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -48,9 +45,6 @@
       <Filter>Исходные файлы</Filter>
     </ClInclude>
     <ClInclude Include="Cat.h">
-      <Filter>Исходные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="List.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
     <ClInclude Include="Keeper.h">

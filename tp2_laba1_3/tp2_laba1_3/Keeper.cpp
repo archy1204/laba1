@@ -1,192 +1,307 @@
-#include "Keeper.h"
+#include"Keeper.h";
 
-Keeper::Keeper() {
-	list1 = new List<Fish>();
-	list2 = new List<Bird>();
-	list3 = new List<Cat>();
-	cout << "Keeper constructor." << endl;
+Keeper::Keeper()
+{
+	size = 0;
+	head = nullptr;
+	cout << "Animal null constructor.\n";
 }
 
-Keeper::Keeper(List<Fish>* list1, List<Bird>* list2, List<Cat>* list3
-) {
-	this->list1 = list1;
-	this->list2 = list2;
-	this->list3 = list3;
-
-	cout << "Copy Keeper constructor." << endl;
+Keeper::Keeper(int siz)
+{
+	size = 0;
+	head = nullptr;
+	cout << "Animal constructor with parametrs." << endl;
 }
 
-Keeper::~Keeper() {
-	clearFish();
-	clearBird();
-	clearCat();
-	cout << "Keeper destructor." << endl;
+Keeper::~Keeper()
+{
+	clear();
+	cout << "Animal destructor." << endl;
 }
 
-List<Fish>* Keeper::getFishList() {
-	return list1;
-}
+Keeper::Keeper(const Keeper& other)
+{
+	int cnt = 0;
+	this->size = other.size;
 
-List<Bird>* Keeper::getBirdList() {
-	return list2;
-}
-
-List<Cat>* Keeper::getCatList() {
-	return list3;
-}
+	Node* current = nullptr;
+	Node* current1 = nullptr;
+	this->head = current;
 
 
-//    add 1
-void Keeper::addFish(Fish& data) {
-	list1->add(data);
-}
+	for (cnt = 0; cnt < this->size; cnt++)
+	{
+		if (head == nullptr)
+		{
+			this->head = new Node(other.head->data);
+			this->tail = this->head;
+		}
+		else
+		{
+			current = other.head;
+			current1 = this->head;
 
-void Keeper::addFish(Fish& data, int i) {
-	list1->insert(data, i);
-}
-//        2
-void Keeper::addBird(Bird& data) {
-	list2->add(data);
-}
-
-void Keeper::addBird(Bird& data, int i) {
-	list2->insert(data, i);
-}
-//        3
-void Keeper::addCat(Cat& data) {
-	list3->add(data);
-}
-
-void Keeper::addCat(Cat& data, int i) {
-	list3->insert(data, i);
-}
-//
-
-
-
-//       get 1
-Fish Keeper::getFish(int i) {
-	return list1->get(i);
-}
-//			 2
-Bird Keeper::getBird(int i) {
-	return list2->get(i);
-}
-//			 3
-Cat Keeper::getCat(int i) {
-	return list3->get(i);
-}
-//
-
-
-
-Fish Keeper::removeFish(int i) {
-	return list1->remove(i);
-}
-
-Bird Keeper::removeBird(int i) {
-	return list2->remove(i);
-}
-
-Cat Keeper::removeCat(int i) {
-	return list3->remove(i);
+			while (current1->pNext != nullptr)
+			{
+				current = current->pNext;
+				current1 = current1->pNext;
+			}
+			current1->pNext = new Node(current->pNext->data, current1->pNext, current1);
+			this->tail = current1->pNext;
+		}
+	}
 }
 
 
-void Keeper::showFish() {
-	list1->Show();
+
+
+void Keeper::add(Animal* data)
+{
+	if (head == nullptr)
+	{
+		head = new Node(data);
+		tail = this->head;
+	}
+	else
+	{
+		Node* current = this->head;
+
+		while (current->pNext != nullptr)
+		{
+			current = current->pNext;
+		}
+		current->pNext = new Node(data, current->pNext, current);
+		tail = current->pNext;
+	}
+	size++;
 }
 
-void Keeper::showBird() {
-	list2->Show();
+void Keeper::insert(Animal* data, int index) {
+	int counter = 0;
+	Node* current = this->head;
+	if (index == size) {
+		this->add(data);
+		return;
+	}
+	while (current != nullptr)
+	{
+		if (counter == index)
+		{
+			Node* prev = current->pPrev;
+			Node* newObj = new Node(data, current, prev);
+
+			if (counter != 0)
+				prev->pNext = newObj;
+			current->pPrev = newObj;
+			if (counter == 0)
+				this->head = newObj;
+			break;
+		}
+		current = current->pNext;
+		counter++;
+	}
+	size++;
+
 }
 
-void Keeper::showCat() {
-	list3->Show();
+Animal* Keeper::get(int index) {
+	int counter = 0;
+	Node* current = this->head;
+	while (current != nullptr)
+	{
+		if (counter == index)
+		{
+			return current->data;
+		}
+		current = current->pNext;
+		counter++;
+	}
+}
+
+Animal* Keeper::remove(int index) {
+	int counter = 0;
+	Node* current = this->head;
+	while (current != nullptr)
+	{
+		if (counter == index)
+		{
+			Node* prev = current->pPrev;
+			Node* next = current->pNext;
+			if (prev != nullptr)
+				prev->pNext = next;
+			if (next != nullptr)
+				next->pPrev = prev;
+			if (counter == 0)
+				this->head = next;
+			size--;
+			return current->data;
+		}
+		current = current->pNext;
+		counter++;
+	}
+}
+
+void Keeper::clear()
+{
+	Node* temp;
+	while (size > 0)
+	{
+		temp = head;
+
+		head = head->pNext;
+
+
+		delete temp;
+
+		size--;
+	}
 }
 
 
-int Keeper::sizeFish() {
-	return list1->getSize();
+
+void Keeper::operator=(const Keeper& other)
+{
+	int cnt = 0;
+	this->size = other.size;
+
+	Node* current = nullptr;
+	Node* current1 = nullptr;
+	this->head = current;
+
+
+	for (cnt = 0; cnt < this->size; cnt++)
+	{
+		if (head == nullptr)
+		{
+			this->head = new Node(other.head->data);
+			this->tail = this->head;
+		}
+		else
+		{
+			current = other.head;
+			current1 = this->head;
+
+			while (current1->pNext != nullptr)
+			{
+				current = current->pNext;
+				current1 = current1->pNext;
+			}
+			current1->pNext = new Node(current->pNext->data, current1->pNext, current1);
+			this->tail = current1->pNext;
+		}
+	}
 }
 
-int Keeper::sizeBird() {
-	return list2->getSize();
+
+
+
+int Keeper::getSize()
+{
+	return size;
 }
 
-int Keeper::sizeCat() {
-	return list3->getSize();
+
+void Keeper::show()
+{
+	Node* current = this->head;
+	if (current != nullptr)
+	{
+		while (current->pNext != nullptr)
+		{
+			current->data->show();
+			current = current->pNext;
+		}
+		current->data->show();
+		cout << endl;
+	}
+	else
+		cout << "The list is empty!!!" << endl;
 }
 
-void Keeper::clearFish() {
-	list1->clear();
+Node::Node(Animal* data, Node* pNext, Node* pPrev)
+{
+	this->data = data;
+	this->pNext = pNext;
+	this->pPrev = pPrev;
 }
 
-void Keeper::clearBird() {
-	list2->clear();
+void operator==(const Keeper& list, Animal* val)
+{
+	bool comp2 = false;
+
+	for (int cnt = 0; cnt < list.size; cnt++)
+	{
+		Node* current = list.head;
+
+		for (int cnt1 = 0; cnt1 != cnt; cnt1++)
+		{
+			current = current->pNext;
+		}
+		if (current->data == val)
+		{
+			comp2 = true;
+		}
+		else
+		{
+			comp2 = false;
+		}
+
+		if (comp2)
+		{
+			cout << "1 ";
+		}
+		else
+		{
+			cout << "0 ";
+		}
+	}
+	cout << endl;
 }
 
-void Keeper::clearCat() {
-	list3->clear();
-}
-
-void Keeper::importLists() {
+void Keeper::importList() {
 	ifstream fin("t1.txt");
-	list1->clear();
-	list2->clear();
-	list3->clear();
+	clear();
 	string breed, color, feedType, feed, habitat, ownerName, nickname, str;
+	Fish* fish;
+	Bird* bird;
+	Cat* cat;
 	while (getline(fin, str)) {
 		if (str == "fish!") {
 			getline(fin, str);
-			int count = stoi(str);
-			while (count > 0) {
-				getline(fin, str);
-				breed = str;
-				getline(fin, str);
-				color = str;
-				getline(fin, str);
-				feedType = str;
-				Fish fish{ breed, color, feedType };
-				list1->add(fish);
-				count--;
-			}
+			breed = str;
+			getline(fin, str);
+			color = str;
+			getline(fin, str);
+			feedType = str;
+			fish = new Fish(breed, color, feedType);
+			add(fish);
 			continue;
 		}
 		if (str == "bird!") {
 			getline(fin, str);
-			int count = stoi(str);
-			while (count > 0) {
-				getline(fin, str);
-				breed = str;
-				getline(fin, str);
-				color = str;
-				getline(fin, str);
-				feed = str;
-				getline(fin, str);
-				habitat = str;
-				Bird bird{ breed, color, feed, habitat };
-				list2->add(bird);
-				count--;
-			}
+			breed = str;
+			getline(fin, str);
+			color = str;
+			getline(fin, str);
+			feed = str;
+			getline(fin, str);
+			habitat = str;
+			bird = new Bird(breed, color, feed, habitat);
+			add(bird);
 			continue;
 		}
 		if (str == "cat!") {
 			getline(fin, str);
-			int count = stoi(str);
-			while (count > 0) {
-				getline(fin, str);
-				breed = str;
-				getline(fin, str);
-				color = str;
-				getline(fin, str);
-				ownerName = str;
-				getline(fin, str);
-				nickname = str;
-				Cat cat{ breed, color, ownerName, nickname };
-				list3->add(cat);
-				count--;
-			}
+			breed = str;
+			getline(fin, str);
+			color = str;
+			getline(fin, str);
+			ownerName = str;
+			getline(fin, str);
+			nickname = str;
+			cat = new Cat(breed, color, ownerName, nickname);
+			add(cat);
 			continue;
 		}
 	}
@@ -194,40 +309,14 @@ void Keeper::importLists() {
 	fin.close();
 }
 
-void Keeper::exportLists() {
-	ofstream fout("t2.txt");
-	if (list1->getSize() > 0) {
-		fout << "fish!" << "\n";
-		fout << list1->getSize() << "\n";
-		for (int i = 0; i < list1->getSize(); i++) {
-			Fish fish = list1->get(i);
-			fout << fish.getBreed() << "\n";
-			fout << fish.getColor() << "\n";
-			fout << fish.getFeedType() << "\n";
-		}
-	}
-	if (list2->getSize() > 0) {
-		fout << "bird!" << "\n";
-		fout << list2->getSize() << "\n";
-		for (int i = 0; i < list2->getSize(); i++) {
-			Bird bird = list2->get(i);
-			fout << bird.getBreed() << "\n";
-			fout << bird.getColor() << "\n";
-			fout << bird.getFeed() << "\n";
-			fout << bird.getHabitat() << "\n";
-		}
-	}
-	if (list3->getSize() > 0) {
-		fout << "cat!" << "\n";
-		fout << list3->getSize() << "\n";
-		for (int i = 0; i < list3->getSize(); i++) {
-			Cat cat = list3->get(i);
-			fout << cat.getBreed() << "\n";
-			fout << cat.getColor() << "\n";
-			fout << cat.getOwnerName() << "\n";
-			fout << cat.getNickname() << "\n";
-		}
+void Keeper::exportList() {
+	string fileName = "t2.txt";
+	ofstream fout(fileName);
+	fout.close();
+	Node* current = this->head;
+	for (int i = 0; i < size; i++) {
+		current->data->save(fileName);
+		current = current->pNext;
 	}
 	cout << "Export is done\n\n";
-	fout.close();
 }

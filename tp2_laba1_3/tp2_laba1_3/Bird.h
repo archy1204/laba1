@@ -14,11 +14,12 @@ public:
 	Bird(string breed, string color, string feed, string habitat);
 	~Bird();
 
-	friend ostream& operator << (ostream& stream, Bird& obj);
-	friend istream& operator >> (istream& stream, Bird& obj);
 	bool operator == (const Bird& obj);
 
-	string showType();
+	virtual void save(string fileName);
+	virtual void change();
+	virtual void show();
+	virtual string showType();
 	void setFeed(string feed);
 	string getFeed();
 	void setHabitat(string habitat);

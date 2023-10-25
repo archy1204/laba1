@@ -13,11 +13,12 @@ public:
 	Fish(string breed, string color, string feedType);
 	~Fish();
 
-	friend ostream& operator << (ostream& stream, Fish& obj);
-	friend istream& operator >> (istream& stream, Fish& obj);
 	bool operator == (const Fish& obj);
 
-	string showType();
+	virtual void save(string fileName);
+	virtual void change();
+	virtual void show();
+	virtual string showType();
 	void setFeedType(string feedType);
 	string getFeedType();
 

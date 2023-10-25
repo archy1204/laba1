@@ -4,20 +4,20 @@ Keeper::Keeper()
 {
 	size = 0;
 	head = nullptr;
-	cout << "Animal null constructor.\n";
+	cout << "Keeper null constructor.\n";
 }
 
 Keeper::Keeper(int siz)
 {
 	size = 0;
 	head = nullptr;
-	cout << "Animal constructor with parametrs." << endl;
+	cout << "Keeper constructor with parametrs." << endl;
 }
 
 Keeper::~Keeper()
 {
 	clear();
-	cout << "Animal destructor." << endl;
+	cout << "Keeper destructor." << endl;
 }
 
 Keeper::Keeper(const Keeper& other)
